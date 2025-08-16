@@ -1,0 +1,16 @@
+# root 계정으로 접속하여 사용자 계정 생성
+mysql -u root –p
+MariaDB [(none)]> show databases;
+MariaDB [(none)]> use mysql;
+MariaDB [mysql]> create user 'spring'@'%' identified by 'spring';
+MariaDB [mysql]> grant all on *.* to 'spring'@'%';
+MariaDB [mysql]> select user, host from user;
+MariaDB [mysql]> flush privileges;
+MariaDB [mysql]> exit;
+
+# spring 계정으로 접속하여 DB생성
+mysql -u spring –p
+MariaDB [(none)]> show grants for current_user;
+MariaDB [(none)]> create database spring_db;
+MariaDB [(none)]> show databases;
+MariaDB [(none)]> use spring_db;
