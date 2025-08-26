@@ -43,4 +43,7 @@ public class Book {
     private LocalDate publishDate;
 
     private Integer price;
+
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private BookDetail bookDetail;
 }

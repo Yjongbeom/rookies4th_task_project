@@ -2,6 +2,7 @@ package com.rookies4.myspringbootlab.service;
 
 import com.rookies4.myspringbootlab.dto.BookDTO;
 import com.rookies4.myspringbootlab.entity.Book;
+import com.rookies4.myspringbootlab.entity.BookDetail;
 import com.rookies4.myspringbootlab.exception.BusinessException;
 import com.rookies4.myspringbootlab.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,38 +19,68 @@ import java.util.stream.Collectors;
 public class BookService {
     private final BookRepository bookRepository;
 
-    public List<BookDTO.BookResponse> getAllBooks(){
+    public List<BookDTO.Response> getAllBooks(){
         return bookRepository.findAll().stream()
-                .map(BookDTO.BookResponse::from)
+                .map(BookDTO.Response::fromEntity)
                 .collect(Collectors.toList());
     }
 
-    public BookDTO.BookResponse getBookById(Long id){
+    public BookDTO.Response getBookById(Long id){
         return bookRepository.findById(id)
-                .map(BookDTO.BookResponse::from)
+                .map(BookDTO.Response::fromEntity)
                 .orElseThrow(() -> new BusinessException("해당 Id의 도서를 찾을 수 없습니다: " + id));
     }
 
-    public BookDTO.BookResponse getBookByIsbn(String isbn){
+    public BookDTO.Response getBookByIsbn(String isbn){
         return bookRepository.findByIsbn(isbn)
-                .map(BookDTO.BookResponse::from)
+                .map(BookDTO.Response::fromEntity)
                 .orElseThrow(() -> new BusinessException("해당 ISBN의 도서를 찾을 수 없습니다: " + isbn));
     }
 
-    public List<BookDTO.BookResponse> getBooksByAuthor(String author){
-        return bookRepository.findByAuthor(author).stream()
-                .map(BookDTO.BookResponse::from)
+    public List<BookDTO.Response> getBooksByAuthor(String author){
+        return bookRepository.findByAuthorContainingIgnoreCase(author).stream()
+                .map(BookDTO.Response::fromEntity)
                 .collect(Collectors.toList());
     }
 
-    public BookDTO.BookResponse createBook(BookDTO.BookCreateRequest request){
-        return Optional.of(request.toEntity())
-                .map(bookRepository::save)
-                .map(BookDTO.BookResponse::from)
-                .orElseThrow(() -> new BusinessException("도서 생성에 실패했습니다."));
+    public List<BookDTO.Response> getBooksByTitle(String title){
+        return bookRepository.findByTitleContainingIgnoreCase(title).stream()
+                .map(BookDTO.Response::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    public BookDTO.BookResponse updateBook(Long id, BookDTO.BookUpdateRequest request){
+    public BookDTO.Response createBook(BookDTO.Request request){
+        if (bookRepository.existsByIsbn(request.getIsbn())) {
+            throw new BusinessException("이미 존재하는 ISBN입니다: " + request.getIsbn());
+        }
+
+        Book book = new Book(
+                request.getTitle(),
+                request.getAuthor(),
+                request.getIsbn(),
+                request.getPublishDate(),
+                request.getPrice()
+        );
+
+        if (request.getDetailRequest() != null) {
+            BookDetail detail = BookDetail.builder()
+                    .description(request.getDetailRequest().getDescription())
+                    .language(request.getDetailRequest().getLanguage())
+                    .pageCount(request.getDetailRequest().getPageCount())
+                    .publisher(request.getDetailRequest().getPublisher())
+                    .coverImageUrl(request.getDetailRequest().getCoverImageUrl())
+                    .edition(request.getDetailRequest().getEdition())
+                    .book(book)
+                    .build();
+            book.setBookDetail(detail);
+        }
+
+        Book saved = bookRepository.save(book);
+        return BookDTO.Response.fromEntity(saved);
+
+    }
+
+    public BookDTO.Response updateBook(Long id, BookDTO.Request request){
         return bookRepository.findById(id)
                 .map(book -> {
                     if(request.getTitle() != null)
@@ -62,20 +93,34 @@ public class BookService {
                         book.setPrice(request.getPrice());
                     if(request.getPublishDate() != null)
                         book.setPublishDate(request.getPublishDate());
+
+                    if (request.getDetailRequest() != null) {
+                        BookDetail detail = book.getBookDetail();
+                        if (detail == null) {
+                            detail = BookDetail.builder().book(book).build();
+                            book.setBookDetail(detail);
+                        }
+                        detail.setDescription(request.getDetailRequest().getDescription());
+                        detail.setLanguage(request.getDetailRequest().getLanguage());
+                        detail.setPageCount(request.getDetailRequest().getPageCount());
+                        detail.setPublisher(request.getDetailRequest().getPublisher());
+                        detail.setCoverImageUrl(request.getDetailRequest().getCoverImageUrl());
+                        detail.setEdition(request.getDetailRequest().getEdition());
+                    }
+
+
                     return book;
                 })
                 .map(bookRepository::save)
-                .map(BookDTO.BookResponse::from)
+                .map(BookDTO.Response::fromEntity)
                 .orElseThrow(() -> new BusinessException("해당 Id의 도서를 찾을 수 없습니다: " + id));
     }
 
     public void deleteBook(Long id){
         bookRepository.findById(id)
-                .map(book -> {
-                    bookRepository.delete(book);
-                    return book;
-                })
-                .orElseThrow(() -> new BusinessException("해당 Id의 도서를 찾을 수 없습니다: " + id));
+                .ifPresentOrElse(bookRepository::delete,
+                () -> {throw new BusinessException("해당 Id의 도서를 찾을 수 없습니다: " + id);
+                });
     }
 
 }
