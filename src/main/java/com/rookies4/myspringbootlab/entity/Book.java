@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @DynamicUpdate
+@Table(name="books")
 public class Book {
     // id(Long), title(String), author(String), isbn(String),
     //publishDate(LocalDate), price(Integer)
