@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book HTML FORM</title>
+  <link rel="stylesheet" href="form.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1>Book Html Form</h1>
+
+    <h2>책 등록</h2>
+    <form id="bookForm" class="form-grid">
+      <div class="form-group">
+        <label for="title">제목:</label>
+        <input type="text" name="title" id="title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="author">저자:</label>
+        <input type="text" name="author" id="author" required>
+      </div>
+
+      <div class="form-group">
+        <label for="isbn">ISBN:</label>
+        <input type="text" name="isbn" id="isbn" required>
+      </div>
+
+      <div class="form-group">
+        <label for="price">가격:</label>
+        <input type="text" name="price" id="price" required>
+      </div>
+
+      <div class="form-group">
+        <label for="publishDate">출판일:</label>
+        <input type="date" name="publishDate" id="publishDate" required>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">등록</button>
+        <button type="reset">초기화</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <h2>등록된 책 목록</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>제목</th>
+          <th>저자</th>
+          <th>ISBN</th>
+          <th>가격</th>
+          <th>출판일</th>
+        </tr>
+      </thead>
+      <tbody id="bookTableBody">
+      </tbody>
+    </table>
+  </div>
+
+  <script src="form.js"></script>
+</body>
+</html>
