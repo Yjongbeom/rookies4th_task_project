@@ -1,13 +1,75 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>도서 관리 시스템</title>
+</head>
+<body>
+  <h1>도서 관리 시스템</h1>
+
+  <div class="form-container">
+    <h2>도서 등록</h2>
+    <form id="bookForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="title">도서명:</label>
+          <input type="text" name="title" id="title" required />
+        </div>
+
+        <div class="form-group">
+          <label for="isbn">ISBN:</label>
+          <input type="text" name="isbn" id="isbn" placeholder="978-3-16-148410-0" />
+        </div>
+
+        <div class="form-group">
+          <label for="author">저자:</label>
+          <input type="text" name="author" id="author" required />
+        </div>
+
+        <div class="form-group">
+          <label for="publisher">출판사:</label>
+          <input type="text" name="publisher" id="publisher" />
+        </div>
+
+        <div class="form-group">
+          <label for="publicationYear">출판년도:</label>
+          <input type="number" name="publicationYear" id="publicationYear" 
+                 min="1900" max="2030" />
+        </div>
+
+        <div class="form-group">
+          <label for="genre">장르:</label>
+          <input type="text" name="genre" id="genre" />
+        </div>
+
+        <div class="button-group">
+          <button type="submit">도서 등록</button>
+          <button type="button" class="cancel-btn" style="display:none">취소</button>
+          <span class="error-message" id="formError"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <h2>도서 목록</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>도서명</th>
+          <th>ISBN</th>
+          <th>저자</th>
+          <th>출판사</th>
+          <th>출판년도</th>
+          <th>장르</th>
+          <th>액션</th>
+        </tr>
+      </thead>
+      <tbody id="bookTableBody"></tbody>
+    </table>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>

@@ -1,0 +1,352 @@
+/* 전체 페이지의 기본 스타일을 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* 메인 제목(h1)의 스타일을 설정합니다 */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 부제목(h2)의 스타일을 설정합니다 */
+h2 {
+    color: #444;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+/* 폼(form) 요소의 스타일을 설정합니다 */
+form {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 라벨(label) 요소의 스타일을 설정합니다 */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* 입력 필드(input)의 스타일을 설정합니다 */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 입력 필드에 포커스가 있을 때 */
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* 버튼(button) 요소의 기본 스타일을 설정합니다 */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 100px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* 버튼에 마우스를 올렸을 때(:hover)의 스타일을 설정합니다 */
+button:hover:not(:disabled) {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* 버튼이 비활성화되었을 때 */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 테이블(table) 요소의 스타일을 설정합니다 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 테이블 헤더(th)와 데이터 셀(td)의 공통 스타일을 설정합니다 */
+th,
+td {
+    padding: 15px 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 테이블 헤더(th)의 추가 스타일을 설정합니다 */
+th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+/* 테이블 행(tr)에 마우스를 올렸을 때(:hover)의 스타일을 설정합니다 */
+tr:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
+}
+
+/* 짝수 번째 행의 배경색을 다르게 설정 (얼룩말 무늬) */
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* 폼을 감싸는 컨테이너의 스타일을 설정합니다 */
+.form-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 폼 필드들을 그리드 레이아웃으로 배치하는 스타일입니다 */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* 각 폼 그룹의 스타일을 설정합니다 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* 폼 그룹 내의 라벨 스타일을 설정합니다 */
+.form-group label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* 폼 그룹 내의 입력 필드 스타일을 설정합니다 */
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 테이블을 감싸는 컨테이너의 스타일을 설정합니다 */
+.table-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 버튼 그룹 스타일 */
+.button-group {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 메시지 스타일 */
+.error-message {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: none;
+    font-weight: bold;
+    border: 1px solid;
+    transition: opacity 0.3s ease;
+}
+
+/* 취소 버튼 스타일 */
+.cancel-btn {
+    background-color: #6c757d;
+    margin-left: 0;
+}
+
+/* 취소 버튼 호버 효과 */
+.cancel-btn:hover:not(:disabled) {
+    background-color: #5a6268;
+}
+
+/* 편집 및 삭제 버튼 공통 스타일 */
+.edit-btn,
+.delete-btn {
+    padding: 8px 12px;
+    margin: 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 60px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* 편집 버튼 스타일 */
+.edit-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+/* 편집 버튼 호버 효과 */
+.edit-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* 삭제 버튼 스타일 */
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* 삭제 버튼 호버 효과 */
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* 액션 버튼들을 담는 셀 스타일 */
+.action-buttons {
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 로딩 애니메이션 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* 모바일 대응 (화면 너비가 768px 이하일 때) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .form-container,
+    .table-container {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .button-group button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+    
+    th,
+    td {
+        padding: 8px 5px;
+    }
+    
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .action-buttons button {
+        width: 100%;
+        margin: 1px 0;
+    }
+}
+
+/* 매우 작은 화면 대응 (480px 이하) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+    
+    h2 {
+        font-size: 18px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    table {
+        min-width: 600px;
+    }
+    
+    input,
+    button {
+        font-size: 16px; /* iOS에서 확대 방지 */
+    }
+}
+
+/* 접근성 향상 */
+button:focus,
+input:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* 스크린 리더용 숨김 클래스 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+input[name="isbn"] {
+  font-family: monospace;
+}
+
+input[name="publicationYear"] {
+  width: 120px;
+}
