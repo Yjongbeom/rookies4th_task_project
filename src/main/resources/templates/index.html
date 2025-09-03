@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h2>User List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>DateTime</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${#temporals.format(user.createdAt,'yyyy-MM-dd hh:mm a')}"></td>
+        <td><a class="btn" th:href="@{/users/edit/{id}(id=${user.id})}">Update</a></td>
+    </tr>
+    </tbody>
+</table>
+<p>
+    <a class="btn" href="/users/signup">Add New User</a>
+</p>
+</body>
+</html>

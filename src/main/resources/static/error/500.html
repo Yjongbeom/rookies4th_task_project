@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>500 - 서버 오류</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 { color: #d9534f; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background: #337ab7;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>500 서버 오류</h1>
+    <p>요청을 처리하는 중 문제가 발생했습니다.</p>
+    <p>잠시 후 다시 시도해주세요.</p>
+
+    <div>
+        <a href="/" class="btn">홈으로</a>
+        <a href="javascript:history.back()" class="btn">이전 페이지</a>
+    </div>
+
+    <!-- 간단한 오류 정보 (선택사항) -->
+    <div th:if="${error}" style="margin-top: 30px; color: #666;">
+        <p th:text="'오류: ' + ${error.message}"></p>
+    </div>
+</div>
+</body>
+</html>

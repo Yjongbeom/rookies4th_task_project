@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - 페이지 없음</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 { color: #d9534f; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background: #337ab7;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>404 페이지를 찾을 수 없습니다</h1>
+    <p>요청하신 페이지가 존재하지 않거나 이동되었습니다.</p>
+    <p>URL을 다시 확인해주세요.</p>
+
+    <div>
+        <a href="/" class="btn">홈으로</a>
+        <a href="javascript:history.back()" class="btn">이전 페이지</a>
+    </div>
+
+    <!-- 선택적 정보 표시 -->
+    <div th:if="${path}" style="margin-top: 30px; color: #666;">
+        <p th:text="'요청 경로: ' + ${path}"></p>
+    </div>
+</div>
+</body>
+</html>

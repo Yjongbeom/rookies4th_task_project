@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot Thymeleaf</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${name}">Default Name</h1>
+    <h2>Hello, <span th:text="${name}">Name</span></h2>
+    <h3>Hello, [[${name}]]</h3>
+    <a class="btn" href="/">Go to User List</a>
+</div>
+</body>
+</html>
